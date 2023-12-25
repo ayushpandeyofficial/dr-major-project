@@ -12,6 +12,8 @@ def save_model_checkpoint(
     avg_val_acc,
     best_val_acc,
 ):
+    best_model_path = None  # Initialize the variable
+
     # Save the model checkpoint
     checkpoint = {
         "epoch": epoch,

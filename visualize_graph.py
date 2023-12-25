@@ -14,5 +14,5 @@ def visualize_graph(epochwise_train_acc,epochwise_val_acc,epochwise_train_loss,e
     axs2.set_title("Train vs Val Accuracy")
     axs2.legend()
 
-    plt.savefig(f"artifacts/{folder_name}/Visualization_graph.png")
+    plt.savefig(f"artifacts/{folder_name}/train_vs_val_graph.png")
     plt.show()

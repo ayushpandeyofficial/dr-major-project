@@ -16,11 +16,7 @@ model.load_state_dict(torch.load(BEST_RESNET50_MODEL))
 model = model.to(device)
 model.eval()
 
-criterion = nn.CrossEntropyLoss().to(device)
-
 # evaluate the model
-test_running_loss = 0.0
-test_running_acc = 0.0
 all_preds = []
 all_labels = []
 
@@ -28,19 +24,12 @@ for test_images, test_labels in test_data_loader:
     test_images, test_labels = test_images.to(device), test_labels.to(device)
     test_model_out = model(test_images)
     test_labels = test_labels.to(test_model_out.device)
-    test_loss = criterion(test_model_out, test_labels)
-    test_running_loss += test_loss.item()
     test_pred = torch.argmax(test_model_out, dim=1)
-    test_acc = (test_pred == test_labels).float().mean()
-    test_running_acc += test_acc.item()
-
+    
     all_preds.extend(test_pred.cpu().numpy())
     all_labels.extend(test_labels.cpu().numpy())
 
-avg_test_loss = test_running_loss / len(test_data_loader)
-avg_test_acc = test_running_acc / len(test_data_loader)
 
-print(f"Avg Test Loss: {avg_test_loss:.3f}, Avg Test Accuracy: {avg_test_acc:.3f}")
 
 # Calculate confusion matrix and classification report
 conf_matrix = confusion_matrix(all_labels, all_preds)

@@ -7,7 +7,7 @@ TEST_CSV_PATH = "data/test.csv"
 # hyperparameters
 BATCH_SIZE = 32
 LR = 0.0001
-EPOCHS = 20
+EPOCHS = 5
 SEED = 42
 
 #best_resnet50 model

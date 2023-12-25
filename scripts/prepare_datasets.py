@@ -39,8 +39,13 @@ X_train, X_val, y_train, y_val = train_test_split(
 
 # save to csvs
 
-save_as_csv(X_train, y_train, "train.csv")
-save_as_csv(X_val, y_val, "val.csv")
-save_as_csv(X_test, y_test, "test.csv")
+# save_as_csv(X_train, y_train, "train.csv")
+# save_as_csv(X_val, y_val, "val.csv")
+# save_as_csv(X_test, y_test, "test.csv")
 
-print("CSVs files  generated successfully.")
+# print("CSVs files  generated successfully.")
+
+plt.hist(y_val)
+plt.title("Validation data distribution")
+plt.savefig("data/Val_data_distribution.png")
+plt.show()

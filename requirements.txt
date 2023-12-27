@@ -3,7 +3,10 @@ pandas
 scikit-learn==1.2.1
 matplotlib==3.7.2
 pyyaml
-torch
-torchvision
+
 torchsummary
 tensorboard
+
+pytorch==2.0.0 
+torchvision==0.15.0
+ torchaudio==2.0.0

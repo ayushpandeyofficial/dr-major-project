@@ -1,7 +1,8 @@
 # 1 Prepare dataset
-from torch.utils.data import Dataset
-from src.utilis import read_as_csv, label_to_idx
 from PIL import Image
+from torch.utils.data import Dataset
+
+from src.utilis import label_to_idx, read_as_csv
 
 
 class DRDataset(Dataset):

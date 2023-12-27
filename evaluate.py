@@ -8,7 +8,7 @@ from src.config import BEST_RESNET50_MODEL
 from src.dataloader import test_data_loader
 from src.models.resnet50 import ResNet50Model
 
-device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
 
 model = ResNet50Model(num_labels=5)

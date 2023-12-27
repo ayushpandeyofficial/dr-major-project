@@ -3,19 +3,21 @@ import warnings
 from datetime import datetime
 
 import torch
+import torch.cuda
 import torch.nn as nn
 from torch.utils.tensorboard import SummaryWriter
 
 from src.config import EPOCHS, LR, SEED
 from src.dataloader import train_data_loader, val_data_loader
-from src.io import save_model_checkpoint
 from src.models.resnet50 import ResNet50Model
-
-from visualize_graph import visualize_graph
 
 warnings.filterwarnings("ignore", category=UserWarning)
 
-device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+if torch.cuda.is_available():
+    print("CUDA is available!")
+else:
+    print("CUDA is not available.")
 print(f"Using device:{device}")
 
 torch.manual_seed(SEED)
@@ -101,15 +103,22 @@ for epoch in range(EPOCHS):
         f"Train Accuracy : {avg_train_acc:.3f} \t  Validation Accuracy : {avg_val_acc:.3f}"
     )
 
-    best_val_acc, checkpoint_path, best_model_path = save_model_checkpoint(
-        model,
-        optimizer,
-        folder_name,
-        EPOCHS,
-        avg_train_loss,
-        avg_val_loss,
-        avg_train_acc,
-        avg_val_acc,
-        best_val_acc,
-    )
-visualize_graph(epochwise_train_acc,epochwise_val_acc,epochwise_train_loss,epochwise_val_loss,folder_name)
+    # Save the model
+    checkpoint = {
+        "epoch": EPOCHS,
+        "model_state_dict": model.state_dict(),
+        "optimizer_state_dict": optimizer.state_dict(),
+        "train_loss": avg_train_loss,
+        "val_loss": avg_val_loss,
+        "train_acc": avg_train_acc,
+        "val_acc": avg_val_acc,
+    }
+
+    torch.save(checkpoint, f"artifacts/{folder_name}/resnet50_model_checkpoint.pt")
+
+    if avg_val_acc > best_val_acc:
+        best_val_acc = avg_val_acc
+        # best_checkpoint_name = f"artifacts/{folder_name}/best_model-val_acc{best_val_acc:.3f}-best_epoch{epoch}.pt"
+        torch.save(
+            model.state_dict(), f"artifacts/{folder_name}/resnet50_best_model.pth"
+        )

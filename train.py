@@ -1,5 +1,6 @@
 import os
 import warnings
+
 from datetime import datetime
 
 import torch
@@ -9,30 +10,32 @@ from torch.utils.tensorboard import SummaryWriter
 from src.config import EPOCHS, LR, SEED
 from src.dataloader import train_data_loader, val_data_loader
 from src.io import save_model_checkpoint
-from src.models.resnet50 import ResNet50Model
-
 from visualize_graph import visualize_graph
+from src.models.models_utils import parse_arguments, load_model, get_device
 
 warnings.filterwarnings("ignore", category=UserWarning)
 
-device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+device = get_device()
 print(f"Using device:{device}")
+
 
 torch.manual_seed(SEED)
 
 best_val_acc = 0
 
+args = parse_arguments(training=True)
+
 dt = datetime.now()
 f_dt = dt.strftime("%Y-%m-%d-%H-%M-%S")
-folder_name = f"resnet50_run-{f_dt}"
+# folder_name = f"resnet50_run-{f_dt}"
+folder_name = f"model_run-{args.model}_{f_dt}"
 os.mkdir(f"artifacts/{folder_name}")
 
 writer = SummaryWriter(log_dir=f"artifacts/{folder_name}/tensorboard_logs")
 
-# Using  ResNet50 model
-model = ResNet50Model(num_labels=5)
 
-model = model.to(device)
+# Conditional block to create the model
+model = load_model(args.model, num_labels=5, device=device)
 
 criterion = nn.CrossEntropyLoss().to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=LR)
@@ -112,4 +115,10 @@ for epoch in range(EPOCHS):
         avg_val_acc,
         best_val_acc,
     )
-visualize_graph(epochwise_train_acc,epochwise_val_acc,epochwise_train_loss,epochwise_val_loss,folder_name)
+visualize_graph(
+    epochwise_train_acc,
+    epochwise_val_acc,
+    epochwise_train_loss,
+    epochwise_val_loss,
+    folder_name,
+)

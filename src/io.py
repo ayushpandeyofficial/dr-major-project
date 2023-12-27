@@ -1,6 +1,7 @@
 import torch
 
 
+
 def save_model_checkpoint(
     model,
     optimizer,
@@ -25,13 +26,14 @@ def save_model_checkpoint(
         "val_acc": avg_val_acc,
     }
 
-    checkpoint_path = f"artifacts/{folder_name}/resnet50_model_checkpoint.pt"
+    checkpoint_path = f"artifacts/{folder_name}/model_checkpoint.pt"
     torch.save(checkpoint, checkpoint_path)
 
     # Save the best model if current validation accuracy is better than the previous best
     if avg_val_acc > best_val_acc:
         best_val_acc = avg_val_acc
-        best_model_path = f"artifacts/{folder_name}/resnet50_best_model.pth"
+        best_model_path = f"artifacts/{folder_name}/best_model.pth"
         torch.save(model.state_dict(), best_model_path)
 
     return best_val_acc, checkpoint_path, best_model_path
+

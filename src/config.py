@@ -6,9 +6,9 @@ TEST_CSV_PATH = "data/test.csv"
 
 # hyperparameters
 BATCH_SIZE = 32
-LR = 0.0001
+LR = 0.00001
 EPOCHS = 50
 SEED = 42
 
-#best_resnet50 model
-BEST_RESNET50_MODEL="artifacts/run-2023-12-24-18-23-01/resnet50_best_model.pth"
+# #best_resnet50 model
+# BEST_RESNET50_MODEL="artifacts/run-2023-12-24-18-23-01/resnet50_best_model.pth"

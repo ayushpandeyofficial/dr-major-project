@@ -1,19 +1,23 @@
 import os
 import warnings
-
 from datetime import datetime
 
+import numpy as np
 import torch
 import torch.nn as nn
+from sklearn.utils import class_weight
 from torch.utils.tensorboard import SummaryWriter
 
+from scripts.prepare_datasets import y_train
 from src.config import EPOCHS, LR, SEED
 from src.dataloader import train_data_loader, val_data_loader
 from src.io import save_model_checkpoint
+from src.models.models_utils import get_device, load_model, parse_arguments
 from visualize_graph import visualize_graph
-from src.models.models_utils import parse_arguments, load_model, get_device
 
 warnings.filterwarnings("ignore", category=UserWarning)
+
+
 
 device = get_device()
 print(f"Using device:{device}")
@@ -37,7 +41,10 @@ writer = SummaryWriter(log_dir=f"artifacts/{folder_name}/tensorboard_logs")
 # Conditional block to create the model
 model = load_model(args.model, num_labels=5, device=device)
 
-criterion = nn.CrossEntropyLoss().to(device)
+
+class_weights = class_weight.compute_class_weight("balanced",classes=np.unique(y_train), y=y_train)
+class_weights=torch.tensor(class_weights,dtype=torch.float32)
+criterion = nn.CrossEntropyLoss(weight=class_weights).to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=LR)
 
 epochwise_train_loss = []

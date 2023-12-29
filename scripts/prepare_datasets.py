@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 
 BASE_DIR = r"data"
 
-TEST_SIZE = 0.15
+TEST_SIZE = 0.10
 VAL_SIZE = 0.1
 
 RANDOM_STATE = 42
@@ -36,16 +36,16 @@ X_train, X_val, y_train, y_val = train_test_split(
     X_, y_, test_size=VAL_SIZE, random_state=RANDOM_STATE, stratify=y_
 )
 
+if __name__=="__main":
+    #save to csvs
 
-# save to csvs
+    save_as_csv(X_train, y_train, "train1.csv")
+    save_as_csv(X_val, y_val, "val1.csv")
+    save_as_csv(X_test, y_test, "test1.csv")
 
-# save_as_csv(X_train, y_train, "train.csv")
-# save_as_csv(X_val, y_val, "val.csv")
-# save_as_csv(X_test, y_test, "test.csv")
+    print("CSVs files  generated successfully.")
 
-# print("CSVs files  generated successfully.")
-
-plt.hist(y_val)
-plt.title("Validation data distribution")
-plt.savefig("data/Val_data_distribution.png")
-plt.show()
+    plt.hist(y_test)
+    plt.title("Test data distribution1")
+    plt.savefig("data/Test_data_distribution1.png")
+    plt.show()

@@ -15,6 +15,7 @@ test_data_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE)
 
 if __name__ == "__main__":
     images, labels = next(iter(train_data_loader))
+    
 
     print(images, labels)
 # from torch.utils.data import DataLoader, WeightedRandomSampler

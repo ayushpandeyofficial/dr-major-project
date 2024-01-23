@@ -1,12 +1,12 @@
 # csv paths
-TRAIN_CSV_PATH = "data/train.csv"
-VAL_CSV_PATH = "data/val.csv"
+TRAIN_CSV_PATH = r"challenge_data/train.csv"
+VAL_CSV_PATH = r"challenge_data/val.csv"
 TEST_CSV_PATH = "data/test.csv"
 
 
 # hyperparameters
 BATCH_SIZE = 32
-LR = 0.00001
+LR = 0.001
 EPOCHS = 50
 SEED = 42
 

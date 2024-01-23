@@ -5,12 +5,13 @@ __pycache__/
 
 aug
 old
+artifacts
 
 __init__.py
 
 # C extensions
 *.so
-
+challenge_data
 # Distribution / packaging
 .Python
 build/

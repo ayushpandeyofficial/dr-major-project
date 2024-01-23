@@ -4,7 +4,7 @@ import torch
 from sklearn.metrics import classification_report, confusion_matrix
 from tqdm import tqdm
 
-from src.dataloader import test_data_loader
+from src.dataloader import val_data_loader, test_data_loader
 from src.models.models_utils import parse_arguments, load_model, get_device
 
 def evaluate_model(model, test_loader, device):
@@ -67,7 +67,7 @@ if __name__ == "__main__":
     model.load_state_dict(state_dict=checkpoint)
 
     # Evaluate the model
-    all_labels, all_preds = evaluate_model(model, test_data_loader, device)
+    all_labels, all_preds = evaluate_model(model, val_data_loader, device)
 
     # Calculate metrics
     conf_matrix, class_report = calculate_metrics(all_labels, all_preds)

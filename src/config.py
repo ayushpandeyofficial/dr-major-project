@@ -1,6 +1,6 @@
 # csv paths
-TRAIN_CSV_PATH = r"challenge_data/train.csv"
-VAL_CSV_PATH = r"challenge_data/val.csv"
+TRAIN_CSV_PATH = r"/kaggle/input/dr-data/train.csv"
+VAL_CSV_PATH = r"/kaggle/input/dr-data/val.csv"
 TEST_CSV_PATH = "data/test.csv"
 
 

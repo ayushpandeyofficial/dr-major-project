@@ -1,7 +1,7 @@
 # csv paths
 TRAIN_CSV_PATH = r"/kaggle/input/dr-data/train.csv"
 VAL_CSV_PATH = r"/kaggle/input/dr-data/val.csv"
-TEST_CSV_PATH = "data/test.csv"
+TEST_CSV_PATH =r"/kaggle/input/test-data/test.csv"
 
 
 # hyperparameters

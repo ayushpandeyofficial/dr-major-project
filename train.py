@@ -8,7 +8,7 @@ import torch.nn as nn
 from sklearn.utils import class_weight
 from torch.utils.tensorboard import SummaryWriter
 
-from scripts.prepare_datasets import y_train
+# from scripts.prepare_datasets import y_train
 from src.config import EPOCHS, LR, SEED
 from src.dataloader import train_data_loader, val_data_loader
 from src.io import save_model_checkpoint
@@ -42,9 +42,9 @@ writer = SummaryWriter(log_dir=f"artifacts/{folder_name}/tensorboard_logs")
 model = load_model(args.model, num_labels=5, device=device)
 
 
-class_weights = class_weight.compute_class_weight("balanced",classes=np.unique(y_train), y=y_train)
-class_weights=torch.tensor(class_weights,dtype=torch.float32)
-criterion = nn.CrossEntropyLoss(weight=class_weights).to(device)
+# class_weights = class_weight.compute_class_weight("balanced",classes=np.unique(y_train), y=y_train)
+# class_weights=torch.tensor(class_weights,dtype=torch.float32)
+criterion = nn.CrossEntropyLoss().to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=LR)
 
 epochwise_train_loss = []

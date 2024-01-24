@@ -17,7 +17,13 @@ def parse_arguments(training=True):
         "-m",
         "--model",
         type=str,
-        choices=["resnet50", "efficientnet-b1", "swin_transformer", "densenet121","vit"],
+        choices=[
+            "resnet50",
+            "efficientnet-b1",
+            "swin_transformer",
+            "densenet121",
+            "vit",
+        ],
         required=True,
     )
 
@@ -48,4 +54,10 @@ def load_model(model_name, num_labels, device):
 
 
 def get_device():
-    return torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    return torch.device(
+        "mps"
+        if torch.backends.mps.is_available()
+        else "cuda"
+        if torch.cuda.is_available()
+        else "cpu"
+    )

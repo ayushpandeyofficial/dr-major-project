@@ -1,7 +1,7 @@
 # csv paths
 TRAIN_CSV_PATH = r"challenge_data/train.csv"
 VAL_CSV_PATH = r"challenge_data/val.csv"
-TEST_CSV_PATH =r"data/test.csv"
+TEST_CSV_PATH =r"challenge_data/test.csv"
 
 
 # hyperparameters

@@ -18,7 +18,7 @@ class DRDataset(Dataset):
         return f"ImageDataset with {self.__len__()} samples"
 
     def __getitem__(self, index):
-        image_dir = os.path.join("dr-data", "train_resized")
+        image_dir = os.path.join("challenge_data", "train_resized")
         image_name = self.images[index]  # Get the image name without extension
         label_name = self.labels[index]
         label = label_to_idx(label_name)

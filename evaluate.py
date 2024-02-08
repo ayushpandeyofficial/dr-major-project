@@ -4,7 +4,7 @@ import torch
 from sklearn.metrics import classification_report, confusion_matrix
 from tqdm import tqdm
 
-from src.dataloader import val_data_loader, test_data_loader
+from src.dataloader import val_data_loader
 from src.models.models_utils import parse_arguments, load_model, get_device
 
 def evaluate_model(model, test_loader, device):

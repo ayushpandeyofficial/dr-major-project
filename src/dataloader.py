@@ -11,6 +11,9 @@ train_labels = torch.tensor(
     [label_to_idx(label) for label in train_dataset.labels], dtype=torch.long
 )
 val_dataset = DRDataset(csv_path=VAL_CSV_PATH, transforms=val_transform)
+val_label= torch.tensor(
+    [label_to_idx(label) for label in val_dataset.labels], dtype=torch.long
+)
 # test_dataset = DRDataset(csv_path=TEST_CSV_PATH, transforms=val_transform)
 train_data_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
 val_data_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE)

@@ -5,10 +5,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 
-BASE_DIR = r"data"
+BASE_DIR = r"aug"
 
 TEST_SIZE = 0.10
-VAL_SIZE = 0.1
+VAL_SIZE = 0.10
 
 RANDOM_STATE = 42
 
@@ -23,7 +23,8 @@ def save_as_csv(images, labels, file_name):
     df.to_csv(csv_file_path, index=False)
 
 
-images = glob.glob(f"{BASE_DIR}/**/*.png")
+images = glob.glob(f"{BASE_DIR}/**/*.jpg")
+# aug/Mild/aug-_0_3489125.jpg
 labels = [extract_label_from_path(image_path) for image_path in images]
 
 # test split
@@ -36,12 +37,12 @@ X_train, X_val, y_train, y_val = train_test_split(
     X_, y_, test_size=VAL_SIZE, random_state=RANDOM_STATE, stratify=y_
 )
 
-if __name__=="__main":
+if __name__=="__main__":
     #save to csvs
 
-    save_as_csv(X_train, y_train, "train1.csv")
-    save_as_csv(X_val, y_val, "val1.csv")
-    save_as_csv(X_test, y_test, "test1.csv")
+    save_as_csv(X_train, y_train, "train_aug.csv")
+    save_as_csv(X_val, y_val, "val_aug.csv")
+    save_as_csv(X_test, y_test, "test_aug.csv")
 
     print("CSVs files  generated successfully.")
 

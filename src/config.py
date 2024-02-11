@@ -1,6 +1,6 @@
 # csv paths
-TRAIN_CSV_PATH = r"challenge_data/train.csv"
-VAL_CSV_PATH = r"challenge_data/val.csv"
+TRAIN_CSV_PATH = r"aug/train_aug.csv"
+VAL_CSV_PATH = r"aug/val_aug.csv"
 #TEST_CSV_PATH =r"challenge_data/test.csv"
 
 

@@ -5,7 +5,7 @@ import torch
 from src.models.densenet121 import DenseNet121Model
 from src.models.efficientnetb1 import EfficientNetB1Model
 from src.models.resnet50 import ResNet50Model
-from src.models.vit_base_patch16_224 import VisionTransformerModel
+from src.models.vit_base_patch16_224 import CustomViT
 from src.models.swin_transformer import (
     SwinTransformerModel,
 )
@@ -46,7 +46,7 @@ def load_model(model_name, num_labels, device):
     elif model_name == "densenet121":
         model = DenseNet121Model(num_labels=num_labels).to(device)
     elif model_name == "vit":
-        model = VisionTransformerModel(num_labels=num_labels).to(device)
+        model = CustomViT(num_labels=num_labels).to(device)
     else:
         raise ValueError(f"Unsupported model: {model_name}")
 
